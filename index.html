@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Guardian Ring – Women Safety App</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --crimson: #C0142A;
+      --deep: #0D0A0B;
+      --rose: #F7C5C5;
+      --cream: #FDF6F0;
+      --gold: #E8B86D;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--deep);
+      color: var(--cream);
+      font-family: 'DM Sans', sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1.4rem 4rem;
+      background: rgba(13,10,11,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(192,20,42,0.2);
+    }
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem; font-weight: 900;
+      color: var(--crimson);
+      letter-spacing: 0.05em;
+    }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a {
+      text-decoration: none; color: var(--cream);
+      font-size: 0.85rem; letter-spacing: 0.1em; text-transform: uppercase;
+      opacity: 0.75; transition: opacity 0.2s;
+    }
+    .nav-links a:hover { opacity: 1; color: var(--gold); }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      display: flex; align-items: center;
+      padding: 8rem 4rem 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 70% 50%, rgba(192,20,42,0.18) 0%, transparent 65%);
+    }
+    .hero-ring {
+      position: absolute; right: -5vw; top: 50%;
+      transform: translateY(-50%);
+      width: 55vw; height: 55vw; max-width: 700px; max-height: 700px;
+      border-radius: 50%;
+      border: 2px solid rgba(192,20,42,0.25);
+      animation: pulse-ring 4s ease-in-out infinite;
+    }
+    .hero-ring::before, .hero-ring::after {
+      content: '';
+      position: absolute; inset: -30px;
+      border-radius: 50%;
+      border: 1px solid rgba(192,20,42,0.12);
+      animation: pulse-ring 4s ease-in-out infinite 0.5s;
+    }
+    .hero-ring::after { inset: -60px; animation-delay: 1s; }
+
+    @keyframes pulse-ring {
+      0%, 100% { transform: translateY(-50%) scale(1); opacity: 0.6; }
+      50% { transform: translateY(-50%) scale(1.03); opacity: 1; }
+    }
+
+    .hero-content { position: relative; z-index: 1; max-width: 650px; }
+    .hero-tag {
+      display: inline-block;
+      background: rgba(192,20,42,0.15);
+      border: 1px solid rgba(192,20,42,0.4);
+      color: var(--rose);
+      font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase;
+      padding: 0.4rem 1rem; border-radius: 999px;
+      margin-bottom: 2rem;
+      animation: fadeUp 0.8s ease both;
+    }
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3rem, 6vw, 5.5rem);
+      font-weight: 900;
+      line-height: 1.05;
+      margin-bottom: 1.5rem;
+      animation: fadeUp 0.8s ease 0.15s both;
+    }
+    .hero h1 span { color: var(--crimson); }
+    .hero p {
+      font-size: 1.1rem; line-height: 1.75;
+      color: rgba(253,246,240,0.7);
+      max-width: 500px;
+      margin-bottom: 2.5rem;
+      animation: fadeUp 0.8s ease 0.3s both;
+    }
+    .hero-btns {
+      display: flex; gap: 1rem; flex-wrap: wrap;
+      animation: fadeUp 0.8s ease 0.45s both;
+    }
+    .btn-primary {
+      background: var(--crimson); color: #fff;
+      padding: 0.9rem 2.2rem; border-radius: 4px;
+      text-decoration: none; font-weight: 500;
+      font-size: 0.9rem; letter-spacing: 0.05em;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .btn-primary:hover { background: #a01020; transform: translateY(-2px); }
+    .btn-secondary {
+      border: 1px solid rgba(253,246,240,0.3); color: var(--cream);
+      padding: 0.9rem 2.2rem; border-radius: 4px;
+      text-decoration: none; font-weight: 400;
+      font-size: 0.9rem; letter-spacing: 0.05em;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .btn-secondary:hover { border-color: var(--gold); color: var(--gold); transform: translateY(-2px); }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* FEATURES */
+    .features {
+      padding: 6rem 4rem;
+      background: #100D0E;
+    }
+    .section-label {
+      font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--crimson); margin-bottom: 0.75rem;
+    }
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      margin-bottom: 3.5rem;
+      max-width: 500px;
+    }
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+    }
+    .feature-card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 8px;
+      padding: 2rem;
+      transition: border-color 0.3s, transform 0.3s;
+    }
+    .feature-card:hover {
+      border-color: rgba(192,20,42,0.4);
+      transform: translateY(-4px);
+    }
+    .feature-icon {
+      font-size: 2rem; margin-bottom: 1.2rem;
+    }
+    .feature-card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem; margin-bottom: 0.6rem;
+    }
+    .feature-card p {
+      font-size: 0.9rem; line-height: 1.65;
+      color: rgba(253,246,240,0.55);
+    }
+
+    /* HOW IT WORKS */
+    .how {
+      padding: 6rem 4rem;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 5rem;
+      align-items: center;
+    }
+    .how-visual {
+      position: relative; display: flex; justify-content: center;
+    }
+    .phone-mock {
+      width: 220px; height: 420px;
+      background: #1a1518;
+      border-radius: 36px;
+      border: 2px solid rgba(192,20,42,0.3);
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      gap: 1.2rem;
+      box-shadow: 0 40px 80px rgba(0,0,0,0.6), 0 0 60px rgba(192,20,42,0.08);
+      position: relative; overflow: hidden;
+    }
+    .phone-mock::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(circle at 50% 30%, rgba(192,20,42,0.12), transparent 60%);
+    }
+    .sos-btn {
+      width: 90px; height: 90px; border-radius: 50%;
+      background: radial-gradient(circle, #C0142A, #8B0010);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem; font-weight: 900; color: #fff;
+      box-shadow: 0 0 30px rgba(192,20,42,0.6);
+      animation: sos-pulse 2s ease-in-out infinite;
+    }
+    @keyframes sos-pulse {
+      0%, 100% { box-shadow: 0 0 30px rgba(192,20,42,0.6); }
+      50% { box-shadow: 0 0 50px rgba(192,20,42,0.9), 0 0 80px rgba(192,20,42,0.3); }
+    }
+    .phone-label {
+      font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase;
+      color: rgba(247,197,197,0.5);
+    }
+    .how-steps { display: flex; flex-direction: column; gap: 2rem; }
+    .step { display: flex; gap: 1.5rem; align-items: flex-start; }
+    .step-num {
+      min-width: 40px; height: 40px;
+      border-radius: 50%;
+      border: 1px solid var(--crimson);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem; color: var(--crimson);
+    }
+    .step h4 { font-size: 1rem; margin-bottom: 0.3rem; }
+    .step p { font-size: 0.88rem; color: rgba(253,246,240,0.55); line-height: 1.6; }
+
+    /* STATS */
+    .stats {
+      padding: 4rem;
+      background: var(--crimson);
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      text-align: center; gap: 2rem;
+    }
+    .stat-num {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 900; margin-bottom: 0.4rem;
+    }
+    .stat-label { font-size: 0.85rem; opacity: 0.8; letter-spacing: 0.05em; }
+
+    /* FOOTER */
+    footer {
+      padding: 3rem 4rem;
+      border-top: 1px solid rgba(255,255,255,0.07);
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 1rem;
+    }
+    .footer-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem; color: var(--crimson);
+    }
+    .footer-links { display: flex; gap: 2rem; }
+    .footer-links a {
+      text-decoration: none; color: rgba(253,246,240,0.5);
+      font-size: 0.85rem; transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--cream); }
+    .footer-copy { font-size: 0.8rem; color: rgba(253,246,240,0.35); width: 100%; }
+
+    @media (max-width: 768px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { display: none; }
+      .hero, .features, .how { padding: 4rem 1.5rem; }
+      .how { grid-template-columns: 1fr; }
+      .stats { grid-template-columns: 1fr; padding: 2.5rem 1.5rem; }
+      footer { padding: 2rem 1.5rem; flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">Guardian Ring</div>
+  <ul class="nav-links">
+    <li><a href="#features">Features</a></li>
+    <li><a href="#how">How It Works</a></li>
+    <li><a href="privacy-policy.html">Privacy</a></li>
+    <li><a href="terms-of-service.html">Terms</a></li>
+  </ul>
+</nav>
+
+<section class="hero">
+  <div class="hero-ring"></div>
+  <div class="hero-content">
+    <span class="hero-tag">🛡️ Women Safety App</span>
+    <h1>Your Safety,<br/><span>Silently Secured</span></h1>
+    <p>Guardian Ring empowers women with a hidden SOS trigger — shake your phone or speak a command to instantly alert your emergency contacts with your live location.</p>
+    <div class="hero-btns">
+      <a href="#features" class="btn-primary">Explore Features</a>
+      <a href="#how" class="btn-secondary">How It Works</a>
+    </div>
+  </div>
+</section>
+
+<section class="features" id="features">
+  <div class="section-label">What We Offer</div>
+  <h2 class="section-title">Complete Protection, Always On</h2>
+  <div class="features-grid">
+    <div class="feature-card">
+      <div class="feature-icon">📳</div>
+      <h3>Shake to SOS</h3>
+      <p>Trigger an emergency alert by shaking your phone — no need to unlock or open the app. Works silently in the background 24/7.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🎙️</div>
+      <h3>Voice Activation</h3>
+      <p>Speak a secret voice command to activate SOS mode without anyone noticing. Completely hands-free and discreet.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">📍</div>
+      <h3>Live GPS Location</h3>
+      <p>Your real-time location is instantly shared with emergency contacts when SOS is triggered. They can track you live.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">👨‍👩‍👧</div>
+      <h3>Family Tracking</h3>
+      <p>Stay connected with your loved ones. Share your live location with trusted family members at any time.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">📞</div>
+      <h3>Fake Call</h3>
+      <p>Simulate an incoming call to escape uncomfortable or dangerous situations naturally and without suspicion.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🔦</div>
+      <h3>Siren & Flashlight</h3>
+      <p>Activate a loud siren or strobe flashlight to draw attention and deter threats in emergency situations.</p>
+    </div>
+  </div>
+</section>
+
+<section class="how" id="how">
+  <div class="how-visual">
+    <div class="phone-mock">
+      <div class="phone-label">Press in emergency</div>
+      <div class="sos-btn">SOS</div>
+      <div class="phone-label">or shake / say command</div>
+    </div>
+  </div>
+  <div>
+    <div class="section-label">How It Works</div>
+    <h2 class="section-title">Three Steps to Safety</h2>
+    <div class="how-steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div>
+          <h4>Set Up Emergency Contacts</h4>
+          <p>Add trusted contacts — family or friends — who will receive your SOS alert and live location.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div>
+          <h4>Activate Hidden Trigger</h4>
+          <p>Shake your phone rapidly or speak your secret voice command. No need to unlock your screen.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div>
+          <h4>Help Is Notified Instantly</h4>
+          <p>Your emergency contacts receive an SMS with your live GPS location and a distress message immediately.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="stats">
+  <div>
+    <div class="stat-num">3sec</div>
+    <div class="stat-label">SOS Alert Speed</div>
+  </div>
+  <div>
+    <div class="stat-num">24/7</div>
+    <div class="stat-label">Background Protection</div>
+  </div>
+  <div>
+    <div class="stat-num">100%</div>
+    <div class="stat-label">Silent & Discreet</div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">Guardian Ring</div>
+  <div class="footer-links">
+    <a href="privacy-policy.html">Privacy Policy</a>
+    <a href="terms-of-service.html">Terms of Service</a>
+    <a href="mailto:lulufathimma14@gmail.com">Contact</a>
+  </div>
+  <div class="footer-copy">© 2026 Guardian Ring. All rights reserved. | lulufathimma14@gmail.com</div>
+</footer>
+
+</body>
+</html>
